@@ -1,7 +1,11 @@
 # coding:utf-8
 from flask import Flask, render_template, request, redirect, session, url_for
+from functools import wraps
+from datetime import timedelta
 
 app = Flask(__name__)
+app.secret_key = '123456'
+app.config.update(SECRET_KEY='123456')
 
 USERS = {
     1: {'name': '掌柜坤',
@@ -18,8 +22,20 @@ USERS = {
         'text': 'hehe，我呵呵'}
 }
 
+def user_login(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        if session['user_info']:
+            print('session --> ', session['user_info'])
+            result = func(*args, **kwargs)
+            return result
+        else:
+            return render_template("login.html", error='请先进行登陆')
+    return wrapper
+
 
 @app.route('/detail/<int:nid>', methods=['GET'])  # method 表示函数支持的方法
+@user_login
 def detail(nid):
     user = session.get('user_info')
     if user:
@@ -31,6 +47,7 @@ def detail(nid):
 
 
 @app.route('/index', methods=['GET'])  # method 表示函数支持的方法
+@user_login
 def index():
     user = session.get('user_info')
     if user:
@@ -41,6 +58,7 @@ def index():
 
 
 @app.route('/login', methods=['GET', 'POST'], endpoint='l1')  # method 表示函数支持的方法,endpoint反向生成url
+@user_login
 def login():
     # source_code: template_folder='templates'  templates为模板位置的文件夹相对目录
 
@@ -51,7 +69,8 @@ def login():
         pwd = request.form.get('pwd')
         if user == 'alex' and pwd == '123':
             session['user_info'] = user
-            return redirect('http://www.luffycity.com')
+            app.permanent_session_lifetime = timedelta(seconds=5)
+            return redirect('index')
         return render_template("login.html", error='用户名或密码错误')
 
 

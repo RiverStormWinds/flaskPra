@@ -209,7 +209,7 @@ def bar():
 bar()
 '''
 
-
+'''
 class Foo(object):
     def __init__(self):
         pass
@@ -229,7 +229,7 @@ class Bar(object):
 
 
 Bar().bar('aa', 'ids')
-
+'''
 
 
 
