@@ -331,51 +331,26 @@ sum(1,2)
 
 '''
 
-import json
+def simple_print(rule, endpoint, func, **options):
+    print(rule, endpoint)
+    print(func, options)
 
 
-# deco_func 与 indent不会同时存在
-def json_output(deco_func=None, indent=None):
-    print("deco_func=%s , indent=%s" % (deco_func, indent))
-
-    def actual_decorator(func):
-        print('func=%s' % func)
-        print('......')
-
-        def inner(*args, **kwargs):
-            result = func(*args, **kwargs)
-            return json.dumps(result, indent=indent)
-
-        return inner
-
-    if deco_func:
-        return actual_decorator(deco_func)  # 返回执行后的值（函数为参数时，直接返回二层装饰器的真实调用）
-    else:
-        return actual_decorator  # 返回函数（三层装饰器本质：返回代入参数以后的可调用的实际二层装饰器方法）
+def route(rule, **options):
+    def decorator(func):
+        endpoint = options.pop('endpoint', None)
+        simple_print(rule, endpoint, func, **options)
+        return func
+    return decorator
 
 
-@json_output
-def A():
-    return {'status': '111'}
-
-
-@json_output()
-def B():
-    return {'status': '222'}
-
-
-@json_output(indent=2)
-def C():
-    return {'status': '333'}
+@route('/', endpoint='n1', method=['GET', 'POST'])
+def index():
+    print('hehe')
 
 
 if __name__ == '__main__':
-    print(A())
-    # print(B())
-    # print(C())
-
-
-
+    index()
 
 
 

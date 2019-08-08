@@ -7,7 +7,7 @@ app.secret_key = 'abcdefg'
 
 @app.route('/')
 def index():
-    pass
+    return 'hehe'
 
 if __name__ == '__main__':
 
