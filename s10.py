@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 app = Flask(__name__)
 
 app.config.from_object("settings.DevelopmentConfig")
@@ -9,7 +9,7 @@ def func1(arg):
 
 @app.route('/')
 def index():
-    return render_template('s10index.html', ff = func1)
+     return render_template('s10index.html', ff = func1)
 
 
 if __name__ == '__main__':

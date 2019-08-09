@@ -26,5 +26,3 @@ def set_cookie():
 if __name__ == '__main__':
     manager.run()
 
-
-

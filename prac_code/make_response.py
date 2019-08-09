@@ -36,7 +36,7 @@ print(a_dict)
 
 # https://www.cnblogs.com/huchong/p/7725564.html  高阶函数链接
 
-
+# https://www.cnblogs.com/wupeiqi/articles/7552008.html  武沛齐alex博客链接
 
 
 
