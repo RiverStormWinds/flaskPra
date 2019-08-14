@@ -331,29 +331,37 @@ sum(1,2)
 
 '''
 
-def simple_print(rule, endpoint, func, **options):
-    print(rule, endpoint)
-    print(func, options)
+# def simple_print(rule, endpoint, func, **options):
+#     print(rule, endpoint)
+#     print(func, options)
+#
+#
+# def route(rule, **options):
+#     def decorator(func):
+#         endpoint = options.pop('endpoint', None)
+#         simple_print(rule, endpoint, func, **options)
+#         return func
+#     return decorator
+#
+#
+# @route('/', endpoint='n1', method=['GET', 'POST'])
+# def index():
+#     print('hehe')
+#
+#
+# if __name__ == '__main__':
+#     index()
 
 
-def route(rule, **options):
-    def decorator(func):
-        endpoint = options.pop('endpoint', None)
-        simple_print(rule, endpoint, func, **options)
-        return func
-    return decorator
+class Person(object):
+    def __init__(self, name, age):
+        self._name = name
+        self._age = age
 
-
-@route('/', endpoint='n1', method=['GET', 'POST'])
-def index():
-    print('hehe')
-
-
-if __name__ == '__main__':
-    index()
-
-
-
+    # 访问器 - getter方法
+    @property
+    def name(self):
+        return self._name
 
 
 
