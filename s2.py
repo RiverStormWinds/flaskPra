@@ -22,15 +22,18 @@ USERS = {
         'text': 'hehe，我呵呵'}
 }
 
+
 def user_login(func):
     @wraps(func)
+    # 如果没有@wraps的话，@user_login 装饰的函数本身就是wrapper函数，
+    # @app.route(...)装饰的全部就都是以wrapper命名的函数，导致函数名相同的冲突，就会报错
     def wrapper(*args, **kwargs):
-        if session['user_info']:
-            print('session --> ', session['user_info'])
+        if not session.get('user_info'):
+            return redirect(url_for('l1'))
+        else:
+            print('session --> ', session.get('user_info'))
             result = func(*args, **kwargs)
             return result
-        else:
-            return render_template("login.html", error='请先进行登陆')
     return wrapper
 
 
@@ -58,10 +61,8 @@ def index():
 
 
 @app.route('/login', methods=['GET', 'POST'], endpoint='l1')  # method 表示函数支持的方法,endpoint反向生成url
-@user_login
 def login():
     # source_code: template_folder='templates'  templates为模板位置的文件夹相对目录
-
     if request.method == "GET":
         return render_template("login.html")
     else:
@@ -69,7 +70,7 @@ def login():
         pwd = request.form.get('pwd')
         if user == 'alex' and pwd == '123':
             session['user_info'] = user
-            app.permanent_session_lifetime = timedelta(seconds=5)
+            app.permanent_session_lifetime = timedelta(seconds=5)  # 设置了session超时时间
             return redirect('index')
         return render_template("login.html", error='用户名或密码错误')
 
