@@ -20,6 +20,7 @@ app.config.from_object("settings.DevelopmentConfig")  # 使用settings文件下的Deve
 def index():
     return 'Hello World!'
 
+
 if __name__ == '__main__':
     app.run()
 
