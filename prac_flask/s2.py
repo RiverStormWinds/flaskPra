@@ -127,6 +127,18 @@ def login():
         return render_template("login.html", error='用户名或密码错误')
 
 
+@app.template_global()
+def sb(a1, a2):
+    return a1 + a2
+# 在template模板中进行使用的方法是 {{sb(1, 2)}}
+
+
+@app.template_filter()
+def db(a1, a2, a3):
+    return a1 + a2 + a3
+# 在template模板中进行使用的方法是 {{1|db(2, 3)}}
+
+
 if __name__ == '__main__':
     app.run(debug=True)
 
