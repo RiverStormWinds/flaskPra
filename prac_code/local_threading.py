@@ -4,9 +4,9 @@ import threading
 
 local_values = threading.local()
 
-class Foo:
-    def __init__(self):
-        self.h = 0
+# class Foo:
+#     def __init__(self):
+#         self.h = 0
 
 # local_values = Foo()
 

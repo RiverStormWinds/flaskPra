@@ -353,25 +353,43 @@ sum(1,2)
 #     index()
 
 
-class Person(object):
-    def __init__(self, name, age):
-        self._name = name
-        self._age = age
-
-    # 访问器 - getter方法
-    @property
-    def name(self):
-        return self._name
-
-
+# class Person(object):
+#     def __init__(self, name, age):
+#         self._name = name
+#         self._age = age
+#
+#     # 访问器 - getter方法
+#     @property
+#     def name(self):
+#         return self._name
 
 
+def log(s):
+    def outer(f):
+        def inner(*args, **kwargs):
+            print(s)
+            result = f(*args, **kwargs)
+            if result:
+                return result
+            else:
+                pass
+        return inner
+    return outer
 
 
+@log('debug')
+def hello(a='hehe'):
+    return a + 'haha'
 
 
+print(hello())
 
 
+@log('info')
+def world():
+    print('woshiyigefenshuajiang')
+
+world()
 
 
 
