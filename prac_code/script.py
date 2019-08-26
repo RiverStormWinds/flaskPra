@@ -1,28 +1,24 @@
-from flask import Flask, make_response
-from flask_script import Manager
+# coding:utf-8
 
-app = Flask(__name__)
+class FuncFile(object):
+    def __init__(self):
+        pass
 
-manager = Manager(app)
-
-@app.route('/')
-def index():
-    return ('<h1>Hello World</h1>')
-
-@app.route('/user/<name>')
-def user(name):
-    return ('<h1>Hello, %s!</h1>' % name)
-
-@manager.command
-def print_str():
-    print('hello world')
-
-@app.route('/set_cookie')
-def set_cookie():
-    response = make_response('Hello World')
-    response.set_cookie('Name', 'Hyman')
+    def cs(self):
+        print('hello world')
 
 
-if __name__ == '__main__':
-    manager.run()
+func_file = FuncFile()
+
+
+def run():
+ while True:
+    cs=input('请输入要访问的URL：')
+    #hasattr利用字符串的形式去对象（模块）中操作（寻找）成员
+    if hasattr(func_file,cs):            #判断用户输入的URL是否在func_file模块中
+        getattr(func_file,cs)()       #有则将func_file模块下的cs函数赋值
+        # func()                           #等同于执行func_file模块下的cs函数
+    else:
+        print('404')#定义错误页面
+run()
 
