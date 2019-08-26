@@ -18,3 +18,27 @@
         情况1：单进程单线程，基于全局变量做
         情况2：单进程多线程，基于threading.local对象做
 
+    flask上下文详细请求过程：
+        - threading.Local()和Flask自定义的Local对象
+        - 请求到来时：
+            - ctx = 封装完成的RequestContext(request, session)对象
+            - ctx.push() 将RequestContext对象放入Flask自定义的Local对象中
+        - 执行视图时：
+            - 导入request
+            - print(request)   -->  LocalProxy对象的__str__方法
+            - request.method   -->  LocalProxy对象的__getattr__方法
+            - request + 1      -->  LocalProxy对象的__add__方法
+                ......等等
+                - 本质就是LocalProxy对象的方法里面 request = LocalProxy(partial(_lookup_req_object, "request"))
+                - 将partial(_lookup_req_object, "request")这个便函数传入到LocalProxy中的魔法方法__str__或__getattr__或__add__之中进行执行
+                - _lookup_req_object就是从Local中拿到RequestContext对象，"request"就是从对象中取出请求相关的数据及信息
+        - 执行结束
+            - ctx.auto_pop(error) 将RequestContext对象从
+            __storage__ =
+                            {
+                                ident唯一标识: {
+                                                 "stack" : [封装完成的RequestContext对象]
+                                              }
+                            }
+            stack.pop()
+
