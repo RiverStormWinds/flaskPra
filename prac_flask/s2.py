@@ -58,7 +58,7 @@ def response1()
 @app.after_request
 def response2()
     print('response2)
-    
+
 接收到请求的最终打印结果如下：
 request1
 request2
