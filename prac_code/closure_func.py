@@ -364,33 +364,48 @@ sum(1,2)
 #         return self._name
 
 
-def log(s):
-    def outer(f):
-        def inner(*args, **kwargs):
-            print(s)
-            result = f(*args, **kwargs)
-            if result:
-                return result
-            else:
-                pass
-        return inner
-    return outer
+# def log(s):
+#     def outer(f):
+#         def inner(*args, **kwargs):
+#             print(s)
+#             result = f(*args, **kwargs)
+#             if result:
+#                 return result
+#             else:
+#                 pass
+#         return inner
+#     return outer
+#
+#
+# @log('debug')
+# def hello(a='hehe'):
+#     return a + 'haha'
+#
+#
+# print(hello())
+#
+#
+# @log('info')
+# def world():
+#     print('woshiyigefenshuajiang')
+#
+# world()
+
+def timmer(func):
+    def wrapper(*args, **kwargs):
+        start_time = time.time()
+        res = func(*args, **kwargs)
+        stop_time = time.time()
+        print('run time is %s' % (stop_time - start_time))
+        return res
+    return wrapper
 
 
-@log('debug')
-def hello(a='hehe'):
-    return a + 'haha'
-
-
-print(hello())
-
-
-@log('info')
-def world():
-    print('woshiyigefenshuajiang')
-
-world()
-
+@timmer  # 就等同于 home = timmer(home)，事实上是将timmer(home) --> wrapper方法的地址传递给了 home
+def home(name):
+    time.sleep(random.randrange(1, 3))
+    print('welecome to %s HOME page' % name)
+    return 123123123123
 
 
 
