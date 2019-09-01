@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, globals, request
 
 app = Flask(__name__)
 
@@ -15,5 +15,6 @@ def before_hello():
 
 if __name__ == '__main__':
     # app.__call__
+    print(request)
     app.run()
 
