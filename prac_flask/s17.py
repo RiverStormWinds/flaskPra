@@ -7,7 +7,7 @@ def func(*args, **kwargs):
     print("触发信号", args, kwargs)
 
 # 到底是信号先执行呢，还是before_first_request先执行呢?
-signals.request_started.connect(func)
+signals.request_started.connect(func)  # 信号的绑定是自己进行定义的 23333
 
 
 # 通过阅读源码，是before_first_request先进行执行

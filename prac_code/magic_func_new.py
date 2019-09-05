@@ -23,20 +23,41 @@
 # print(a)
 
 
+# class IntAbs(int):
+#     def __new__(cls, integer):
+#         if type(integer) == str:
+#             integer = ord(integer)
+#         else:
+#             integer = abs(integer)
+#         return super().__new__(cls, integer)
+#
+#     def __init__(self, integer):
+#         self.integer = integer
+#
+# a = IntAbs('a')
+# print(a)
+#
+# b = IntAbs(-3)
+# print(b, b.integer)
+
+
 class IntAbs(int):
     def __new__(cls, integer):
-        if type(integer) == str:
-            integer = ord(integer)
-        else:
-            integer = abs(integer)
+        integer = abs(integer)
+        # super()是用来解决python多重继承问题的，如果是单继承，不使用super()没有任何问题
         return super().__new__(cls, integer)
 
-    def __init__(self, integer):
-        self.integer = integer
-
-a = IntAbs('a')
+a = IntAbs(-3)
 print(a)
 
-b = IntAbs(-3)
-print(b, b.integer)
+
+
+
+
+
+
+
+
+
+
 
