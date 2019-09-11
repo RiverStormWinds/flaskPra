@@ -1,13 +1,15 @@
 # coding:utf-8
 
-class MyType(type):
-    def __init__(self, *args, **kwargs):
-        print('init')
-        super(MyType, self).__init__(*args, **kwargs)
 
-    def __call__(self, *args, **kwargs):
+class MyType(type):
+    def __init__(cls, *args, **kwargs):
+        print('init')
+        super(MyType, cls).__init__(*args, **kwargs)
+
+    def __call__(cls, *args, **kwargs):
         print('call')
-        super(MyType, self).__call__(*args, **kwargs)
+        super(MyType, cls).__call__(*args, **kwargs)
+
 
 class Foo(metaclass=MyType):
     # 1. 元类的特点：类就是元类的实例化，所以在创建Foo类的时候，调用了MyType元类的__init__方法
@@ -16,6 +18,7 @@ class Foo(metaclass=MyType):
     # 4. 元类__call__方法本质就是调用元类创建的类Foo的__new__方法和__init__方法
     print('Foo')
     pass
+
 
 obj = Foo()
 
