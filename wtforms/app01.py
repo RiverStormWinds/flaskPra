@@ -10,6 +10,7 @@ from wtforms import widgets
 
 app = Flask(__name__, template_folder='templates')
 app.debug = True
+app.template_folder = 'templetes'
 
 
 class LoginForm(Form):

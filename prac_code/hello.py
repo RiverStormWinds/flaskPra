@@ -31,35 +31,56 @@ a_list.sort(key=lambda k: (k[0], k[1]))
 print(a_list)
 '''
 
-class A(object):
-    pass
+# class A(object):
+#     pass
+#
+#
+# class ListMetaclass(type):
+#     def __new__(cls, name, bases, attrs):
+#         """
+#         name代表类的名称；bases代表当前类的父类集合；attrs代表当前类的属性，
+#         是狭义上属性和方法的集合，可以用字典dict的方式传入
+#         :param name: 代表类的名字
+#         :param bases: 代表类的父类集合
+#         :param attrs: 代表当前类的属性，是狭义上的属性和方法集合，可以用字典的方式传入
+#         :return:
+#         """
+#         attrs['add'] = lambda self, value: self.append(value)
+#         return type.__new__(cls, name, bases, attrs)
+#
+#
+# class MyList(list, metaclass=ListMetaclass):
+#     pass
+#
+#
+# l = MyList()
+#
+# l.add(1)
+#
+# print(l)
 
-
-class ListMetaclass(type):
-    def __new__(cls, name, bases, attrs):
-        """
-        name代表类的名称；bases代表当前类的父类集合；attrs代表当前类的属性，
-        是狭义上属性和方法的集合，可以用字典dict的方式传入
-        :param name: 代表类的名字
-        :param bases: 代表类的父类集合
-        :param attrs: 代表当前类的属性，是狭义上的属性和方法集合，可以用字典的方式传入
-        :return:
-        """
-        attrs['add'] = lambda self, value: self.append(value)
-        return type.__new__(cls, name, bases, attrs)
-
-
-class MyList(list, metaclass=ListMetaclass):
+# 查找并计算self__class__源码
+class Foo(object):
+    a = "ting_dinasty"
+    b = "imagretion"
     def __init__(self):
         pass
 
+    @classmethod
+    def test(cls):
+        pass
+
+    def show(self):
+        print(self.__class__)
 
 
-l = MyList()
+f = Foo()
+f.show()
 
-l.add(1)
 
-print(l)
+
+
+
 
 
 
