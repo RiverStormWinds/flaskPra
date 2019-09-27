@@ -1,8 +1,9 @@
 import datetime
-import web
 
+import web
 from model import TrainModel
-from code import CalModelMerge
+
+from guotai_remote_server.ai_trans_code import CalModelMerge
 
 urls = (
     '/predict', CalModelMerge,
