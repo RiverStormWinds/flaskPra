@@ -10,6 +10,7 @@ from wtforms import widgets
 
 app = Flask(__name__, template_folder='templates')
 app.debug = True
+app.template_folder = 'templetes'
 
 
 class LoginForm(Form):
@@ -22,6 +23,7 @@ class LoginForm(Form):
         widget=widgets.TextInput(),
         render_kw={'class': 'form-control'}
     )
+
     pwd = simple.PasswordField(
         label='密码',
         validators=[
@@ -29,17 +31,19 @@ class LoginForm(Form):
             validators.Length(min=8, message='用户名长度必须大于%(min)d'),
             validators.Regexp(regex="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}",
                               message='密码至少8个字符，至少1个大写字母，1个小写字母，1个数字和1个特殊字符')
-
         ],
         widget=widgets.PasswordInput(),
         render_kw={'class': 'form-control'}
     )
 
+print(LoginForm.__dict__)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
         form = LoginForm()
+        print(form.validate())
+        print(form.name)
         return render_template('login.html', form=form)
     else:
         form = LoginForm(formdata=request.form)
@@ -52,3 +56,7 @@ def login():
 
 if __name__ == '__main__':
     app.run()
+<<<<<<< HEAD
+=======
+
+>>>>>>> bae0d5269331efd7b2b59fa7ed7c4efcf20cefad
