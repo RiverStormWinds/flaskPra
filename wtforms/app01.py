@@ -21,7 +21,6 @@ class LoginForm(Form):
         ],
         widget=widgets.TextInput(),
         render_kw={'class': 'form-control'}
-
     )
     pwd = simple.PasswordField(
         label='密码',
