@@ -56,7 +56,3 @@ def login():
 
 if __name__ == '__main__':
     app.run()
-<<<<<<< HEAD
-=======
-
->>>>>>> bae0d5269331efd7b2b59fa7ed7c4efcf20cefad
