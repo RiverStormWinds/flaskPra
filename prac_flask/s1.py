@@ -9,7 +9,7 @@ app.secret_key = 'hwk'
 
 @app.route('/')
 def index():
-    return 'hehe'
+    return render_template('boot.html')
 
 
 if __name__ == '__main__':
