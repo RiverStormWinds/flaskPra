@@ -59,6 +59,8 @@ print(a_list)
 #
 # print(l)
 
+'''
+
 # 查找并计算self__class__源码
 class Foo(object):
     a = "ting_dinasty"
@@ -77,10 +79,23 @@ class Foo(object):
 f = Foo()
 f.show()
 
+'''
+
+class LocalProxy(object):
+
+    __slots__ = ("__local", "__dict__", "__name__", "__wrapped__")
 
 
+    def __init__(self, temp, name=None):
+        # object.__setattr__(self, "_LocalProxy__local", local)
+        # object.__setattr__(self, "__name__", name)
+        # if callable(local) and not hasattr(local, "__release_local__"):
+        #     object.__setattr__(self, "__wrapped__", local)
+        self.__local = temp
 
 
+if __name__ == '__main__':
+    l = LocalProxy('hehe')
 
 
 

@@ -1,5 +1,5 @@
 # coding:utf-8
-from flask import Flask, render_template
+from flask import Flask, render_template, g
 
 app = Flask(__name__)
 
@@ -9,6 +9,8 @@ app.secret_key = 'hwk'
 
 @app.route('/')
 def index():
+    g.a = 'abc'
+    print(g.get('a'))
     return render_template('boot.html')
 
 
